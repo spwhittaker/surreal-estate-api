@@ -16,6 +16,19 @@ require('dotenv').config({
 app.use(bodyParser.json());
 app.use(methodOverride());
 
+app.use(function(req, res, next){
+  const whitelist = ['localhost:8080'];
+  const origin = req.headers.origin;
+
+  whitelist.forEach(function(val, key){
+    if (origin.indexOf(val) > -1){
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+  })
+
+  next();
+});
+
 mongoose.connect(process.env.DATABASE_CONN);
 
 restify.serve(router, PropertyListingModel);
