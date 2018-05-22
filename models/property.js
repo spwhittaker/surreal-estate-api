@@ -6,7 +6,8 @@ const PropertyListingSchema = new mongoose.Schema({
   bedrooms: { type: Number, require: true },
   bathrooms: { type: Number, require: true },
   price: { type: Number, require: true },
-  city: { type: String, require: true }
+  city: { type: String, require: true },
+  email: { type: String, require: true },
 });
 
 const PropertyListingModel = mongoose.model('PropertyListing', PropertyListingSchema);
