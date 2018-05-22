@@ -9,6 +9,6 @@ const PropertyListingSchema = new mongoose.Schema({
   city: { type: String, require: true }
 });
 
-const PropertyListingModel = mongoose.model('ProperyListing', PropertyListingSchema);
+const PropertyListingModel = mongoose.model('PropertyListing', PropertyListingSchema);
 
 module.exports = PropertyListingModel;
