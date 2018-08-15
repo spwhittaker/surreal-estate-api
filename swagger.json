@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Surreal Estate API",
+    "description": "Endpoints for interfacing with the Surreal Estate backend",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "PropertyListings",
+      "description": "API endpoints for managing PropertyListings"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/propertylistings": {
+      "post": {
+        "tags": [
+          "PropertyListings"
+        ],
+        "summary": "Create new property listing",
+        "parameters": [
+          {
+            "name": "propertyListing",
+            "in": "body",
+            "description": "Property listing that we want to create",
+            "schema": {
+              "$ref": "#/definitions/PropertyListing"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New property listing created",
+            "schema": {
+              "$ref": "#/definitions/PropertyListing"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PropertyListings"
+        ],
+        "summary": "Get all property listings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PropertyListings"
+            }
+          }
+        }
+      }
+    },
+    "/propertylistings/{propertyListingId}": {
+      "parameters": [
+        {
+          "name": "propertyListingId",
+          "in": "path",
+          "required": true,
+          "description": "ID of property listing that we want to retrieve",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PropertyListings"
+        ],
+        "summary": "Get property listing with given propertyListingId",
+        "responses": {
+          "200": {
+            "description": "Property listing retrieved",
+            "schema": {
+              "$ref": "#/definitions/PropertyListing"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete property listing with given propertyListingId",
+        "tags": [
+          "PropertyListings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Property listing deleted",
+            "schema": {
+              "$ref": "#/definitions/PropertyListing"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update property listing with given propertyListingId",
+        "tags": [
+          "PropertyListings"
+        ],
+        "parameters": [
+          {
+            "name": "propertyListing",
+            "in": "body",
+            "description": "Property listing object with updated values",
+            "schema": {
+              "$ref": "#/definitions/PropertyListing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Property listing updated",
+            "schema": {
+              "$ref": "#/definitions/PropertyListing"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PropertyListing": {
+      "required": [
+        "_id",
+        "title",
+        "type",
+        "bedrooms",
+        "bathrooms",
+        "price",
+        "city",
+        "email"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "bedrooms": {
+          "type": "number"
+        },
+        "bathrooms": {
+          "type": "number"
+        },
+        "price": {
+          "type": "number"
+        },
+        "city": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "PropertyListings": {
+      "type": "array",
+      "$ref": "#/definitions/PropertyListing"
+    }
+  }
+}

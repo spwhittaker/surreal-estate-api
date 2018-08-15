@@ -8,13 +8,17 @@ const path = require('path');
 const router = express.Router();
 const expressListRoutes   = require('express-list-routes');
 const PropertyListingModel = require('./models/property');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 require('dotenv').config({
-  path: path.join(__dirname, './settings.env'),
+  path: path.join(__dirname, './.env'),
 });
 
 app.use(bodyParser.json());
 app.use(methodOverride());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/v1', router);
 
 app.use(function(req, res, next){
   const whitelist = ['localhost:8080'];
@@ -27,10 +31,12 @@ app.use(function(req, res, next){
     }
   })
 
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+
   next();
 });
 
-mongoose.connect(process.env.DATABASE_CONN);
+mongoose.connect(process.env.DATABASE_CONN, { useNewUrlParser: true });
 
 restify.serve(router, PropertyListingModel);
 
