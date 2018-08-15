@@ -17,15 +17,13 @@ require('dotenv').config({
 
 app.use(bodyParser.json());
 app.use(methodOverride());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/api/v1', router);
 
 app.use(function(req, res, next){
   const whitelist = ['localhost:8080'];
   const origin = req.headers.origin;
 
   whitelist.forEach(function(val, key){
-    if (origin.indexOf(val) > -1){
+    if (origin && origin.indexOf(val) > -1){
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     }
@@ -41,6 +39,8 @@ mongoose.connect(process.env.DATABASE_CONN, { useNewUrlParser: true });
 restify.serve(router, PropertyListingModel);
 
 app.use(router);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/v1', router);
 
 expressListRoutes({}, 'Endpoints:', router );
 

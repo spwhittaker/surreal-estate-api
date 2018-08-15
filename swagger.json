@@ -27,7 +27,7 @@
     "application/json"
   ],
   "paths": {
-    "/propertylistings": {
+    "/PropertyListing": {
       "post": {
         "tags": [
           "PropertyListings"
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/propertylistings/{propertyListingId}": {
+    "/PropertyListing/{propertyListingId}": {
       "parameters": [
         {
           "name": "propertyListingId",
