@@ -7,6 +7,7 @@ const app = express();
 const path = require('path');
 const router = express.Router();
 const expressListRoutes   = require('express-list-routes');
+const cors = require('cors');
 const PropertyListingModel = require('./models/property');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -15,24 +16,10 @@ require('dotenv').config({
   path: path.join(__dirname, './.env'),
 });
 
+app.use(cors({ credentials: true, origin: true }));
+app.options('*', cors());
 app.use(bodyParser.json());
 app.use(methodOverride());
-
-app.use(function(req, res, next){
-  const whitelist = ['localhost:8080'];
-  const origin = req.headers.origin;
-
-  whitelist.forEach(function(val, key){
-    if (origin && origin.indexOf(val) > -1){
-      res.setHeader('Access-Control-Allow-Origin', origin);
-      res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    }
-  })
-
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-
-  next();
-});
 
 mongoose.connect(process.env.DATABASE_CONN, { useNewUrlParser: true });
 
