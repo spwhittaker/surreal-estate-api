@@ -70,6 +70,20 @@
         }
       }
     },
+    "/PropertyListing/count": {
+      "get": {
+        "tags": ["PropertyListings"],
+        "summary": "Get total number of PropertyListings.",
+        "responses": {
+          "200": {
+            "description": "Number of properties",
+            "schema": {
+              "$ref": "#/definitions/count"
+            }
+          }
+        }
+      }
+    },
     "/PropertyListing/{propertyListingId}": {
       "parameters": [
         {
@@ -135,6 +149,13 @@
     }
   },
   "definitions": {
+    "count": {
+      "properties": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
     "PropertyListing": {
       "required": [
         "_id",
