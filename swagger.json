@@ -315,7 +315,7 @@
         "propertyListing",
         "fbUserId"
       ],
-      "favourites": {
+      "properties": {
         "_id": {
           "type": "string",
           "uniqueItems": true
