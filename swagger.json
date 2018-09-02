@@ -312,7 +312,7 @@
     "Favourite": {
       "required": [
         "_id",
-        "propertyId",
+        "property",
         "fbUserId"
       ],
       "properties": {
@@ -320,8 +320,9 @@
           "type": "string",
           "uniqueItems": true
         },
-        "propertyId": {
-          "type": "string"
+        "property": {
+          "type": "string",
+          "description": "Property ID"
         },
         "fbUserId": {
           "type": "string"
