@@ -15,6 +15,10 @@
     {
       "name": "PropertyListings",
       "description": "API endpoints for managing PropertyListings"
+    },
+    {
+      "name": "Favourites",
+      "description": "API endpoints for managing Favourites"
     }
   ],
   "schemes": [
@@ -146,6 +150,112 @@
           }
         }
       }
+    },
+    "/Favourite": {
+      "post": {
+        "tags": [
+          "Favourites"
+        ],
+        "summary": "Create new favourite",
+        "parameters": [
+          {
+            "name": "favourite",
+            "in": "body",
+            "description": "Favourite that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Favourite"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New favourite created",
+            "schema": {
+              "$ref": "#/definitions/Favourite"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Favourites"
+        ],
+        "summary": "Get all favourites",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Favourites"
+            }
+          }
+        }
+      }
+    },
+    "/Favourites/{favouriteId}": {
+      "parameters": [
+        {
+          "name": "favouriteId",
+          "in": "path",
+          "required": true,
+          "description": "ID of faovurite that we want to retrieve",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Favourites"
+        ],
+        "summary": "Get favourite with given favouriteId",
+        "responses": {
+          "200": {
+            "description": "Favourite retrieved",
+            "schema": {
+              "$ref": "#/definitions/Favourite"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete favourite with given favouriteId",
+        "tags": [
+          "Favourites"
+        ],
+        "responses": {
+          "200": {
+            "description": "Favourite deleted",
+            "schema": {
+              "$ref": "#/definitions/Favourite"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update favourite with given favouriteId",
+        "tags": [
+          "Favourites"
+        ],
+        "parameters": [
+          {
+            "name": "favourite",
+            "in": "body",
+            "description": "Favourite object with updated values",
+            "schema": {
+              "$ref": "#/definitions/Favourite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Favourite updated",
+            "schema": {
+              "$ref": "#/definitions/Favourite"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -198,6 +308,29 @@
     "PropertyListings": {
       "type": "array",
       "$ref": "#/definitions/PropertyListing"
+    },
+    "Favourite": {
+      "required": [
+        "_id",
+        "propertyId",
+        "fbUserId"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "propertyId": {
+          "type": "string"
+        },
+        "fbUserId": {
+          "type": "string"
+        }
+      }
+    },
+    "Favourites": {
+      "type": "array",
+      "$ref": "#/definitions/Favourite"
     }
   }
 }

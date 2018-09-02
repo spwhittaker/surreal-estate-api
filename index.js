@@ -9,6 +9,7 @@ const router = express.Router();
 const expressListRoutes   = require('express-list-routes');
 const cors = require('cors');
 const PropertyListingModel = require('./models/property');
+const FavouriteModel = require('./models/favourite');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -24,6 +25,7 @@ app.use(methodOverride());
 mongoose.connect(process.env.DATABASE_CONN, { useNewUrlParser: true });
 
 restify.serve(router, PropertyListingModel);
+restify.serve(router, FavouriteModel);
 
 app.use(router);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
