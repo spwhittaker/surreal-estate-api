@@ -312,15 +312,15 @@
     "Favourite": {
       "required": [
         "_id",
-        "property",
+        "propertyListing",
         "fbUserId"
       ],
-      "properties": {
+      "favourites": {
         "_id": {
           "type": "string",
           "uniqueItems": true
         },
-        "property": {
+        "propertyListing": {
           "type": "string",
           "description": "Property ID"
         },
