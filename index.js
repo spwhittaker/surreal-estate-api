@@ -22,6 +22,7 @@ app.options('*', cors());
 app.use(bodyParser.json());
 app.use(methodOverride());
 
+
 mongoose.connect(process.env.DATABASE_CONN, { useNewUrlParser: true });
 
 restify.serve(router, PropertyListingModel);
@@ -33,6 +34,7 @@ app.use('/api/v1', router);
 
 expressListRoutes({}, 'Endpoints:', router );
 
-app.listen(3000, () => {
+const PORT = process.argv[3];
+app.listen(PORT || 3000, () => {
   console.log('Surreal Estate API is running on http://localhost:3000');
 });
