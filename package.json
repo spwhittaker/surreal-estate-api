@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
@@ -17,7 +18,7 @@
     "express-list-routes": "^0.1.4",
     "express-restify-mongoose": "^4.3.0",
     "method-override": "^2.3.10",
-    "mongoose": "^5.1.0",
+    "mongoose": "^5.8.3",
     "swagger-ui-express": "^3.0.10"
   },
   "engines": {
